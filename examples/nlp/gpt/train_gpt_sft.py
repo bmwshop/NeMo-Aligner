@@ -101,6 +101,12 @@ def _modify_config(gpt_cfg, cfg, add_cfg_to_tree=False):
 
         if cfg.model.get("seq_len_interpolation_factor", None) is not None:
             gpt_cfg.seq_len_interpolation_factor = cfg.model.seq_len_interpolation_factor
+            
+        if cfg.model.get("pretrained_max_position_embeddings", None) is not None:
+            gpt_cfg.pretrained_max_position_embeddings = cfg.model.pretrained_max_position_embeddings
+
+        if cfg.model.get("rotary_augment_seq", None) is not None:
+            gpt_cfg.rotary_augment_seq = cfg.model.rotary_augment_seq
 
         gpt_cfg.inference = cfg.model.get("inference", {})
 
