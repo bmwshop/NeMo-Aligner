@@ -17,7 +17,7 @@ ARG PROTOBUF_VERSION=4.24.4
 ARG ALIGNER_COMMIT=shifts
 
 # if you get errors building TE or Apex, decrease this to 4
-ARG MAX_JOBS=8
+ARG MAX_JOBS=32
 
 # needed in case git complains that it can't detect a valid email, this email is fake but works
 RUN git config --global user.email "worker@nvidia.com"
