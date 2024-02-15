@@ -4,11 +4,17 @@ FROM nvcr.io/nvidia/pytorch:23.10-py3
 ### config tags
 ARG APEX_TAG=master
 ARG TE_TAG=release_v1.1
-ARG MLM_TAG=core_r0.4.0
-ARG NEMO_TAG=r1.22.0
+# ARG MLM_TAG=core_r0.4.0
+# shifts is forked off the above
+ARG MLM_TAG=shifts
+# ARG NEMO_TAG=r1.22.0
+# shifts is forked off the above
+ARG NEMO_TAG=shifts
 ARG PYTRITON_VERSION=0.4.1
 ARG PROTOBUF_VERSION=4.24.4
-ARG ALIGNER_COMMIT=main
+# ARG ALIGNER_COMMIT=main
+# shifts is forked from the above
+ARG ALIGNER_COMMIT=shifts
 
 # if you get errors building TE or Apex, decrease this to 4
 ARG MAX_JOBS=8
@@ -45,7 +51,8 @@ RUN pip install -U --no-deps protobuf==$PROTOBUF_VERSION
 RUN pip install --upgrade-strategy only-if-needed jsonlines
 
 # NeMo
-RUN git clone https://github.com/NVIDIA/NeMo.git && \
+# RUN git clone https://github.com/NVIDIA/NeMo.git && \
+RUN git clone https://github.com/bmwshop/NeMo.git && \
     cd NeMo && \
     git pull && \
     if [ ! -z $NEMO_TAG ]; then \
@@ -65,7 +72,8 @@ RUN git clone https://github.com/NVIDIA/NeMo.git && \
 
 # MLM
 RUN pip uninstall -y megatron-core && \
-    git clone https://github.com/NVIDIA/Megatron-LM.git && \
+    git clone https://github.com/bmwshop/Megatron-LM.git && \
+#     git clone https://github.com/NVIDIA/Megatron-LM.git && \
     cd Megatron-LM && \
     git pull && \
     if [ ! -z $MLM_TAG ]; then \
@@ -75,7 +83,8 @@ RUN pip uninstall -y megatron-core && \
     pip install -e .
 
 # NeMo Aligner
-RUN git clone https://github.com/NVIDIA/NeMo-Aligner.git && \
+# RUN git clone https://github.com/NVIDIA/NeMo-Aligner.git && \
+RUN git clone https://github.com/bmwshop/NeMo-Aligner.git && \
     cd NeMo-Aligner && \
     git pull && \
     if [ ! -z $ALIGNER_COMMIT ]; then \
