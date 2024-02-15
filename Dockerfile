@@ -22,6 +22,11 @@ ARG MAX_JOBS=32
 # needed in case git complains that it can't detect a valid email, this email is fake but works
 RUN git config --global user.email "worker@nvidia.com"
 
+# force FA
+ENV NVTE_ALLOW_NONDETERMINISTIC_ALGO=1
+ENV NVTE_FLASH_ATTN=1
+ENV export NVTE_FUSED_ATTN=0
+
 WORKDIR /opt
 
 # install TransformerEngine
