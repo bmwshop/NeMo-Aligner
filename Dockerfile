@@ -3,7 +3,9 @@ FROM nvcr.io/nvidia/pytorch:23.10-py3
 
 ### config tags
 ARG APEX_TAG=master
-ARG TE_TAG=release_v1.1
+# ARG TE_TAG=release_v1.1
+# shifts is forked off the above
+ARG TE_TAG=shifts
 # ARG MLM_TAG=core_r0.4.0
 # shifts is forked off the above
 ARG MLM_TAG=shifts
@@ -25,13 +27,15 @@ RUN git config --global user.email "worker@nvidia.com"
 # force FA
 ENV NVTE_ALLOW_NONDETERMINISTIC_ALGO=1
 ENV NVTE_FLASH_ATTN=1
-ENV export NVTE_FUSED_ATTN=0
+ENV NVTE_FUSED_ATTN=0
+ENV FORCE_FLASH_ATTN=1
 
 WORKDIR /opt
 
 # install TransformerEngine
 RUN pip uninstall -y transformer-engine && \
-    git clone https://github.com/NVIDIA/TransformerEngine.git && \
+    # git clone https://github.com/NVIDIA/TransformerEngine.git && \
+    git clone https://github.com/bmwshop/TransformerEngine.git && \
     cd TransformerEngine && \
     if [ ! -z $TE_TAG ]; then \
         git fetch origin $TE_TAG && \
