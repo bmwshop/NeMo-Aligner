@@ -61,8 +61,10 @@ RUN pip install --upgrade-strategy only-if-needed jsonlines
 
 # NeMo
 # RUN git clone https://github.com/NVIDIA/NeMo.git && \
-RUN git clone https://github.com/bmwshop/NeMo.git && \
-    cd NeMo && \
+# RUN git clone https://github.com/bmwshop/NeMo.git && \
+# RUN echo "forcei9"
+RUN git clone https://github.com/bmwshop/NeMo.git
+RUN     cd NeMo && \
     git pull && \
     if [ ! -z $NEMO_TAG ]; then \
         git fetch origin $NEMO_TAG && \
