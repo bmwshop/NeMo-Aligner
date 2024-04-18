@@ -108,6 +108,12 @@ def _modify_config(gpt_cfg, cfg, add_cfg_to_tree=False):
         if cfg.model.get("rotary_augment_seq", None) is not None:
             gpt_cfg.rotary_augment_seq = cfg.model.rotary_augment_seq
 
+        if cfg.model.get("rotary_base", None) is not None:
+            gpt_cfg.rotary_base = cfg.model.rotary_base
+
+        if cfg.model.get("rotary_percentage", None) is not None:
+            gpt_cfg.rotary_percentage = cfg.model.rotary_percentage
+
         gpt_cfg.inference = cfg.model.get("inference", {})
 
         # This is needed when modifying a hparam file directly to load `.ckpt` files.
