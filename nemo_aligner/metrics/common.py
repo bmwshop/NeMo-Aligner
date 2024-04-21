@@ -18,6 +18,7 @@ from typing import Dict, Optional
 
 import hydra
 from omegaconf import DictConfig
+from nemo.utils import logging
 
 
 class InferenceMetricsHandler:
@@ -27,6 +28,7 @@ class InferenceMetricsHandler:
     """
 
     def __init__(self, metrics_config: Optional[DictConfig]):
+        logging.info(f'metrics_config: {metrics_config}')
         if metrics_config is None:
             metrics_config = {}
         self.metrics = hydra.utils.instantiate(metrics_config)
