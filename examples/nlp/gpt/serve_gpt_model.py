@@ -147,7 +147,9 @@ def main(cfg) -> None:
                 pretrained_cfg.megatron_amp_O2 = False
             elif trainer.precision in ['bf16', 'bf16-mixed'] and cfg.get('megatron_amp_O2', False):
                 pretrained_cfg.megatron_amp_O2 = True
-                
+            
+            if 'target' in cfg.inference: # ability to override target class
+                pretrained_cfg.target = cfg.inference['target']
             pretrained_cfg.rotary_augment_seq = OmegaConf.merge(pretrained_cfg.rotary_augment_seq, cfg.inference['rotary_augment_seq'])
         model = MegatronGPTModel.restore_from(
             restore_path=cfg.gpt_model_file,
