@@ -104,4 +104,6 @@ RUN git clone https://github.com/bmwshop/NeMo-Aligner.git && \
     fi && \
     pip install --no-deps -e .
 
+# fix the ImportError: cannot import name 'ALBERT_PRETRAINED_MODEL_ARCHIVE_LIST' from 'transformers' (/usr/local/lib/python3.10/dist-packages/transformers/__init__.py)
+RUN pip install transformers==4.40.2
 WORKDIR /workspace
